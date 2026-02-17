@@ -1,15 +1,16 @@
 import cron from "cron";
 import https from "https";
 
-const job = new cron.CronJob("*/14****", function () {
+const job = new cron.CronJob("*/14 * * * *", function () {
   https
     .get(process.env.API_URL, (res) => {
       if (res.statusCode === 200) {
-        console.log("GET request sent successfully");
+        console.log("Self ping success");
       } else {
-        console.log("GET request failed", res.statusCode);
+        console.log("Self ping failed:", res.statusCode);
       }
     })
-    .on("error", (e) => console.error("Error while sending request", e));
+    .on("error", (e) => console.error("Ping error:", e));
 });
- export default job;
+
+export default job;
