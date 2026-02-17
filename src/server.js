@@ -6,7 +6,9 @@ import { db } from "./config/db.js";
 import { eq, and } from "drizzle-orm";
 
 const app = express();
-const PORT = ENV.PORT;
+const PORT = ENV.PORT || 5001;
+
+if(ENV.NODE_ENV === "production") job.start();
 
 app.use(express.json());
 
