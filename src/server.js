@@ -7,9 +7,14 @@ import { eq, and } from "drizzle-orm";
 import job from "./cron.js";
 
 const app = express();
-const PORT = ENV.PORT || 5001;
+const PORT = process.env.PORT || ENV.PORT || 5001;
 
-if(ENV.NODE_ENV === "production") job.start();
+
+if (process.env.NODE_ENV === "production") {
+  job.start();
+  console.log("Cron started");
+}
+
 
 app.use(express.json());
 
